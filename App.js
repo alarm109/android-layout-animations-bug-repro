@@ -1,6 +1,6 @@
 import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
 import React, {useEffect, useState} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {View, Text, TouchableOpacity} from 'react-native';
 
@@ -13,13 +13,15 @@ export const PopUpComponent: React.FC = ({show}) => {
             left: 0,
         }}>
             {show && (
-                <Animated.View entering={FadeIn} exiting={FadeOut} style={{
-                    backgroundColor: 'cyan',
+                <Animated.View entering={FadeIn.duration(1500)} exiting={FadeOut} style={{
+                    backgroundColor: 'white',
                     paddingVertical: 20,
                     paddingHorizontal: 20,
                     justifyContent: 'space-between',
                     flexDirection: 'row',
                     borderRadius: 12,
+                    borderColor: 'black',
+                    borderWidth: 1,
                     marginHorizontal: 16,
                 }}>
                     <Text>Complete</Text>
@@ -62,7 +64,7 @@ function SecondScreen({showPopup}) {
     );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
     const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -71,7 +73,7 @@ function App() {
         if (isPopupVisible) {
             setTimeout(() => {
                 setIsPopupVisible(false);
-            }, 2000);
+            }, 3000);
         }
     }, [isPopupVisible]);
 
